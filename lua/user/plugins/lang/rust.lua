@@ -37,7 +37,6 @@ return {
     dependencies = { "mfussenegger/nvim-dap" },
     version = vim.fn.has("nvim-0.10.0") == 0 and "^4" or false,
     opts = function()
-
       return {
         tools = {
           hover_actions = {
@@ -46,11 +45,11 @@ return {
           }
         },
         server = {
+          capabilities = vim.lsp.protocol.make_client_capabilities(),
           on_attach = function(_, bufnr)
-
-            vim.keymap.set("n", "<leader>la", function()
-              vim.cmd.RustLsp("codeAction")
-            end, { desc = "Code Action", buffer = bufnr })
+            -- vim.keymap.set("n", "<leader>la", function()
+            --   vim.cmd.RustLsp("codeAction")
+            -- end, { desc = "Code Action", buffer = bufnr })
             vim.keymap.set("n", "K", function()
               vim.cmd.RustLsp({ 'hover', 'actions' })
             end, { desc = "Documentation", buffer = bufnr })
@@ -91,9 +90,9 @@ return {
         },
       }
     end,
-    config = function(_, _)
+    config = function(_, opts)
       vim.g.rustaceanvim = function()
-        local t = {}
+        local t = opts
         local codelldb_bin = vim.fn.exepath("codelldb")
         local dap = nil
 
