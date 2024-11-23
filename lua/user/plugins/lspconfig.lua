@@ -35,9 +35,6 @@ return {
       }
 
       opts.setup.bashls = {}
-      opts.setup.cssls = {
-        cmd = { "vscode-css-language-server", "--stdio" }
-      }
 
       for lsp, lsp_opts in pairs(opts.setup) do
         lspconfig[lsp].setup(vim.tbl_deep_extend('keep', lsp_opts, capabilities))

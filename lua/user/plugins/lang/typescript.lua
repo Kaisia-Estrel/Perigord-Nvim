@@ -31,7 +31,7 @@ return {
       return vim.tbl_deep_extend('keep', opts, {
         setup = {
           vtsls = {
-            cmd = { "npx", "vtsls", "--stdio" },
+            cmd = { "vtsls", "--stdio" },
             on_attach = function(client, _)
               vim.lsp.commands["editor.action.showReferences"] = function(command, ctx)
                 local locations = command.arguments[3]

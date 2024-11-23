@@ -4,6 +4,25 @@ return {
     config = function(_, opts)
       opts.ensure_installed = opts.ensure_installed or {}
       table.insert(opts.ensure_installed, "yuck")
+      table.insert(opts.ensure_installed, "d2")
+
+      vim.api.nvim_create_autocmd({ 'BufRead', 'BufEnter', 'BufWinEnter' }, {
+        pattern = { '*.d2' },
+        callback = function()
+          vim.opt.filetype = 'd2'
+          vim.cmd("TSEnable highlight")
+        end
+      })
+
+      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+      parser_config.d2 = {
+        install_info = {
+          url = 'https://github.com/pleshevskiy/tree-sitter-d2',
+          revision = 'main',
+          files = { 'src/parser.c', 'src/scanner.cc' },
+        },
+        filetype = 'd2',
+      };
 
       opts.highlight = { enable = true }
       opts.textobjects = {

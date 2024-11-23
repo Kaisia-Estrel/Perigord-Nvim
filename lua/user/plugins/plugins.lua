@@ -3,6 +3,12 @@ return {
   { "eraserhd/parinfer-rust", build = "cargo build --release" },
   { "farmergreg/vim-lastplace" },
   { "nvim-treesitter/playground" },
+  { "terrastruct/d2-vim" },
+  { "xuhdev/vim-latex-live-preview" },
+  { "lervag/vimtex",
+    init = function()
+      vim.g.vimtex_view_method = "zathura"
+    end },
   { "lewis6991/gitsigns.nvim", opts = {} },
   { "kylechui/nvim-surround", opts = {} },
   { "xiyaowong/link-visitor.nvim", opts = {} },
