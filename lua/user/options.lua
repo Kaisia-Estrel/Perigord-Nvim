@@ -116,3 +116,5 @@ vim.diagnostic.config({
   virtual_text = false,
   virtual_lines = true,
 })
+
+vim.cmd([[au BufReadCmd *.jar,*.xpi,*.cbz call zip#Browse(expand("<amatch>"))]])
