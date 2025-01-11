@@ -16,6 +16,7 @@ Warning: A majority of this config's functionality is reliant on nix packaging
     - [Nix](#nix)
     - [Python](#python)
     - [Markdown](#markdown)
+    - [Latex](#latex)
     - [Shell](#shell)
     - [Misc](#misc)
 - [Some Bugs](#some-bugs)
@@ -99,3 +100,10 @@ Warning: A majority of this config's functionality is reliant on nix packaging
 
 - [cspell](https://github.com/streetsidesoftware/cspell) - Spellchecker
 - [jq](https://github.com/stedolan/jq) - Json processor
+
+#### Latex
+
+- [go](https://go.dev/) - For building "f3fora/nvim-texlabconfig"
+- [texlab](https://github.com/latex-lsp/texlab)
+- [zathura](https://pwmt.org/projects/zathura/)
+- LaTex
