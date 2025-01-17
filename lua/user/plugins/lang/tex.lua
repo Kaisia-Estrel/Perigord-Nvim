@@ -7,6 +7,11 @@ return {
     opts = {},
     build = 'go build'
   },
+  { "andrewferrier/wrapping.nvim",
+    opts = {
+      notify_on_switch = false
+    },
+  },
   {
     "neovim/nvim-lspconfig",
     opts = function(_, opts)
@@ -21,6 +26,7 @@ return {
       }
       opts.setup.texlab = {
         on_attach = function(_, bufnr)
+          require('wrapping').soft_wrap_mode()
           vim.keymap.set("n", "<leader>lC", "<cmd>VimtexCompile<cr>", { desc = "Compile", buffer = bufnr })
           vim.keymap.set("n", "<leader>l3", "<cmd>VimtexCountWords!<cr>",
             { desc = "Detailed Word Count", buffer = bufnr })

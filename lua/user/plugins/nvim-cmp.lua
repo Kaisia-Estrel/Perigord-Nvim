@@ -119,7 +119,6 @@ return {
           fields = { "kind", "abbr", "menu" },
           format = format
         },
-
         mapping = cmp.mapping.preset.insert({
           ["<C-k>"] = cmp.mapping.select_prev_item(),
           ["<C-j>"] = cmp.mapping.select_next_item(),

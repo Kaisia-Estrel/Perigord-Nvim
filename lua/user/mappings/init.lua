@@ -121,6 +121,8 @@ vim.keymap.set('n', 'zO', require('ufo').openAllFolds, { desc = "Open all folds"
 vim.keymap.set('n', 'zC', require('ufo').closeAllFolds, { desc = "Close all folds" })
 vim.keymap.set('n', 'zK', require('ufo').peekFoldedLinesUnderCursor, { desc = "Preview Fold" })
 
+vim.keymap.set('i', '<C-p>', '<C-x><C-p>', { noremap = true, silent = true })
+
 wk.add({
 
   { "<leader><leader>", telescope.find_files, desc = "Find Files" },
