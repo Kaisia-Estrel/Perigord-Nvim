@@ -76,7 +76,7 @@ return {
         sources = (require("user.util").union_with(nil, opts.sources, cmp.config.sources({
           { name = 'nvim_lsp', priority = 10 },
           { name = 'nvim_lsp_signature_help', priority = 10 },
-          { name = 'codeium', priority = 9 },
+          { name = 'codeium', priority = 5 },
           { name = 'luasnip', priority = 8, option = { show_autosnippets = true } },
           { name = 'treesitter', priority = 8, keyword_length = 2 },
           { name = 'buffer', priority = 7, keyword_length = 3 },
