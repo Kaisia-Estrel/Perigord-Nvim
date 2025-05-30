@@ -6,7 +6,7 @@ return {
   },
   { "mfussenegger/nvim-dap",
     lazy = true,
-    dependencies = { "rcarriga/nvim-dap-ui", "anuvyklack/hydra.nvim", "nvim-telescope/telescope.nvim",
+    dependencies = { "rcarriga/nvim-dap-ui", "nvimtools/hydra.nvim", "nvim-telescope/telescope.nvim",
       "nvim-telescope/telescope-dap.nvim" },
     config = function(_, opts)
       local dap = require("dap")
@@ -115,7 +115,9 @@ return {
           color = "pink",
           hint = {
             type = "window",
-            border = "single",
+            float_opts = {
+              border = "single",
+            },
             title = "foo",
             position = "middle-right"
           },

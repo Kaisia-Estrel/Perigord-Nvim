@@ -1,5 +1,8 @@
 ![showcase](./data/showcase.png)
 
+
+- Updated to Neovim version: 0.11.1
+
 Warning: A majority of this config's functionality is reliant on nix packaging
 
 <!--toc:start-->

@@ -14,7 +14,7 @@ vim.keymap.set("n", "<cs-Left>", smart_splits.swap_buf_left, { noremap = true, s
 vim.keymap.set("n", "<cs-Right>", smart_splits.swap_buf_right,
   { noremap = true, silent = true, desc = "Swap Buffer Right" })
 
-vim.keymap.set("n", "<C-w>w", smart_splits.start_resize_mode, { noremap = true, silent = true, desc = "Resize Mode" })
+-- vim.keymap.set("n", "<C-w>w", smart_splits.start_resize_mode, { noremap = true, silent = true, desc = "Resize Mode" })
 
 vim.keymap.set({ "n", "o", "x", "v" }, "gh", "^", { noremap = true, silent = true, desc = "Go to line start" })
 vim.keymap.set({ "n", "o", "x", "v" }, "gl", "$", { noremap = true, silent = true, desc = "Go to line end" })
@@ -153,8 +153,8 @@ wk.add({
   { "gD", vim.lsp.buf.declaration, desc = "Declaration" },
   { "gi", vim.lsp.buf.implementation, desc = "Implementation" },
   { "gr", vim.lsp.buf.references, desc = "References" },
-  { "g[", vim.diagnostic.goto_prev, desc = "Previous Diagnostic" },
-  { "g]", vim.diagnostic.goto_next, desc = "Next Diagnostic" },
+  { "g[", function() vim.diagnostic.jump({ count = -1 }) end, desc = "Previous Diagnostic" },
+  { "g]", function() vim.diagnostic.jump({ count = 1 }) end, desc = "Next Diagnostic" },
   { "gt", telescope.live_grep, desc = "Text" },
   { 'vi<tab>', require('user.util.select-indentline').select, desc = "Select Indent" },
   { 'di<tab>', require('user.util.select-indentline').delete, desc = "Select Indent" },
@@ -178,7 +178,9 @@ Hydra({
     color = 'pink',
     invoke_on_body = true,
     hint = {
-      border = 'rounded'
+      float_opts = {
+        border = 'rounded'
+      }
     },
     on_enter = function()
       vim.cmd 'mkview'
@@ -194,7 +196,7 @@ Hydra({
       vim.cmd 'normal zv'
       gitsigns.toggle_signs(false)
       gitsigns.toggle_linehl(false)
-      gitsigns.toggle_deleted(false)
+      gitsigns.preview_hunk_inline()
     end,
   },
   mode = { 'n', 'x' },
@@ -203,22 +205,22 @@ Hydra({
     { 'J',
       function()
         if vim.wo.diff then return ']c' end
-        vim.schedule(function() gitsigns.next_hunk() end)
+        vim.schedule(function() gitsigns.nav_hunk('next') end)
         return '<Ignore>'
       end,
       { expr = true, desc = 'next hunk' } },
     { 'K',
       function()
         if vim.wo.diff then return '[c' end
-        vim.schedule(function() gitsigns.prev_hunk() end)
+        vim.schedule(function() gitsigns.nav_hunk('prev') end)
         return '<Ignore>'
       end,
       { expr = true, desc = 'prev hunk' } },
     { 's', ':Gitsigns stage_hunk<CR>', { silent = true, desc = 'stage hunk' } },
-    { 'u', gitsigns.undo_stage_hunk, { desc = 'undo last stage' } },
+    { 'u', gitsigns.stage_hunk, { desc = 'undo last stage' } },
     { 'S', gitsigns.stage_buffer, { desc = 'stage buffer' } },
     { 'p', gitsigns.preview_hunk, { desc = 'preview hunk' } },
-    { 'd', gitsigns.toggle_deleted, { nowait = true, desc = 'toggle deleted' } },
+    { 'd', gitsigns.preview_hunk_inline, { nowait = true, desc = 'toggle deleted' } },
     { 'b', gitsigns.blame_line, { desc = 'blame' } },
     { 'B', function() gitsigns.blame_line { full = true } end, { desc = 'blame show full' } },
     { '/', gitsigns.show, { exit = true, desc = 'show base file' } }, -- show the base of the file
