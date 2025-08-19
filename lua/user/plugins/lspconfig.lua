@@ -28,6 +28,21 @@ return {
       })
       vim.lsp.inlay_hint.enable()
 
+
+      local group = vim.api.nvim_create_augroup("no_inlay_hints_in_insert", { clear = true })
+      local prevInlayHintStatus = vim.lsp.inlay_hint.is_enabled()
+      vim.api.nvim_create_autocmd("InsertEnter", { group = group,
+        callback = function()
+          prevInlayHintStatus = vim.lsp.inlay_hint.is_enabled()
+          vim.lsp.inlay_hint.enable(false)
+        end
+      })
+      vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave" }, { group = group,
+        callback = function()
+          vim.lsp.inlay_hint.enable(prevInlayHintStatus)
+        end
+      })
+
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities.textDocument.foldingRange = {
         dynamicRegistration = false,

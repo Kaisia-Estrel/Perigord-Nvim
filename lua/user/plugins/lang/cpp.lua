@@ -23,9 +23,6 @@ return {
     dependencies = "neovim/nvim-lspconfig",
     config = function()
       require("clangd_extensions").setup({
-        inlay_hints = {
-          inline = false,
-        },
         ast = {
           role_icons = {
             type = "",
@@ -50,22 +47,10 @@ return {
       require('lspconfig').clangd.setup(
         {
           on_attach = function(_, bufnr)
-            local group = vim.api.nvim_create_augroup("clangd_no_inlay_hints_in_insert", { clear = true })
 
             vim.keymap.set('n', "<leader>lh", "<cmd>ClangdSwitchSourceHeader<cr>",
               { buffer = bufnr, desc = "Switch header/source" })
-            vim.keymap.set("n", "<leader>l?", function()
-              if require("clangd_extensions.inlay_hints").toggle_inlay_hints() then
-                vim.api.nvim_create_autocmd("InsertEnter", { group = group, buffer = bufnr,
-                  callback = require("clangd_extensions.inlay_hints").disable_inlay_hints
-                })
-                vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave" }, { group = group, buffer = bufnr,
-                  callback = require("clangd_extensions.inlay_hints").set_inlay_hints
-                })
-              else
-                vim.api.nvim_clear_autocmds({ group = group, buffer = bufnr })
-              end
-            end, { buffer = bufnr, desc = "[l]sp [h]ints toggle" })
+
           end,
           root_dir = function(fname)
             return require("lspconfig.util").root_pattern(
