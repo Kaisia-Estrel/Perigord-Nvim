@@ -52,7 +52,9 @@ return {
       opts.setup.bashls = {}
 
       for lsp, lsp_opts in pairs(opts.setup) do
-        lspconfig[lsp].setup(vim.tbl_deep_extend('keep', lsp_opts, capabilities))
+        -- lspconfig[lsp].setup(vim.tbl_deep_extend('keep', lsp_opts, capabilities))
+        vim.lsp.config(lsp, vim.tbl_deep_extend('keep', lsp_opts, capabilities))
+        vim.lsp.enable(lsp)
       end
     end
   }

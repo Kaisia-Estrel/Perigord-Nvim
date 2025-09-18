@@ -18,7 +18,7 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       setup = {
-        omnisharp = { 
+        omnisharp = {
           cmd = { "OmniSharp", "--languageserver", "--hostPID", vim.fn.getpid() }
         },
       },
