@@ -1,55 +1,3 @@
-vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
-  pattern = { "*.typ" },
-  callback = function(e)
-    require('wrapping').soft_wrap_mode()
-    local watch = function()
-      local job = require('plenary.job')
-
-
-      if vim.fn.executable("firefox") then
-        local co = coroutine.create(function(url)
-          job:new({
-            command = "firefox",
-            args = { "--new-window", url }
-          }):start()
-        end)
-
-        local typst = job:new({
-          command = "typst-live",
-          args = { e.file, "--no-browser-tab" },
-          on_stderr = function(_, data, _)
-            for match in data:gmatch("%[INFO %] Server is listening on (.*)") do
-              coroutine.resume(co, match)
-            end
-          end
-        })
-        typst:start()
-
-        vim.api.nvim_create_autocmd("VimLeavePre", {
-          callback = function()
-            os.execute("pkill -TERM -P " .. typst.pid)
-          end
-        })
-
-
-      else
-        local typst = job:new({
-          command = "typst-live",
-          args = { e.file },
-        })
-        typst:start()
-
-        vim.api.nvim_create_autocmd("VimLeavePre", {
-          callback = function()
-            typst:shutdown()
-          end
-        })
-      end
-    end
-    vim.keymap.set("n", "<leader>lC", watch, { desc = "Watch", buffer = e.buf })
-  end
-})
-
 return {
   recommended = {
     ft = "typ",
@@ -69,16 +17,45 @@ return {
   },
 
   {
-    "stevearc/conform.nvim",
+    "neovim/nvim-lspconfig",
     opts = {
-      formatters_by_ft = {
-        typst = { "typstyle" },
-      },
-      format_on_save = {
-        timeout_ms = 500,
-        lsp_format = "fallback",
-      },
-    },
-  },
+      setup = {
+        tinymist = {
+          settings = {
+            formatterMode = "typstyle",
+            exportPdf = "ontype"
+          },
 
+          on_attach = function(client, bufnr)
+            require("wrapping").soft_wrap_mode()
+
+            vim.keymap.set("n", "<leader>lp", function()
+              client:exec_cmd({
+                title = "pin",
+                command = "tinymist.pinMain",
+                arguments = { vim.api.nvim_buf_get_name(0) },
+              }, { bufnr = bufnr })
+            end, { desc = "Pin as mainfile", noremap = true })
+
+
+            vim.keymap.set("n", "<leader>lW", function()
+              local job = require("plenary.job")
+
+              job:new({
+                command = "typst",
+                args = { "watch", vim.api.nvim_buf_get_name(bufnr) },
+              }):start()
+
+              vim.defer_fn(function()
+                job:new({
+                  command = "zathura",
+                  args = { (vim.api.nvim_buf_get_name(bufnr):gsub("%.typ$", ".pdf")) }
+                }):start()
+              end, 200)
+            end, { desc = "Watch", noremap = true })
+          end
+        }
+      }
+    }
+  },
 }
