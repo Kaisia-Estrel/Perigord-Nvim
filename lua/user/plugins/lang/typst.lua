@@ -29,6 +29,13 @@ return {
           on_attach = function(client, bufnr)
             require("wrapping").soft_wrap_mode()
 
+            vim.keymap.set("n", "<C-k>", "gk", { noremap = true })
+            vim.keymap.set("n", "<C-j>", "gj", { noremap = true })
+            vim.keymap.set("n", "<Up>", "gk", { noremap = true })
+            vim.keymap.set("n", "<Down>", "gj", { noremap = true })
+            vim.keymap.set("i", "<Up>", "<C-o>gk", { noremap = true })
+            vim.keymap.set("i", "<Down>", "<C-o>gj", { noremap = true })
+
             vim.keymap.set("n", "<leader>lp", function()
               client:exec_cmd({
                 title = "pin",
