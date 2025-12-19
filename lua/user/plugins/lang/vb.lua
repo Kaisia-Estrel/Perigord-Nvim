@@ -8,9 +8,6 @@ return {
   { "CoolCoderSuper/vbnet.nvim", config = function()
     require("vbnet").setup()
 
-
-
-
     local cmd = {}
     if vim.fn.executable("vb-ls") == 1 then
       cmd = { "vb-ls" }
