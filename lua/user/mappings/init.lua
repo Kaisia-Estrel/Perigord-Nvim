@@ -16,6 +16,11 @@ vim.keymap.set("n", "<cs-Right>", smart_splits.swap_buf_right,
 
 -- vim.keymap.set("n", "<C-w>w", smart_splits.start_resize_mode, { noremap = true, silent = true, desc = "Resize Mode" })
 
+
+vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Plug>(leap-forward)')
+vim.keymap.set({ 'n', 'x', 'o' }, 'S', '<Plug>(leap-backward)')
+vim.keymap.set('n', 'gs', '<Plug>(leap-from-window)')
+
 vim.keymap.set({ "n", "o", "x", "v" }, "gh", "^", { noremap = true, silent = true, desc = "Go to line start" })
 vim.keymap.set({ "n", "o", "x", "v" }, "gl", "$", { noremap = true, silent = true, desc = "Go to line end" })
 vim.keymap.set("n", "<C-l>", "<cmd>nohl<CR>", { noremap = true, silent = true, desc = "Toggle Terminal" })

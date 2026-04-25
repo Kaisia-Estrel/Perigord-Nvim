@@ -21,6 +21,7 @@ return {
     opts = {}
   },
   { "MunifTanjim/prettier.nvim",
+
   },
   {
     "ray-x/web-tools.nvim",
@@ -44,5 +45,18 @@ return {
         }
       }
     }
+  },
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        html = { "prettier" },
+      },
+      format_on_save = {
+        -- These options will be passed to conform.format()
+        timeout_ms = 500,
+        lsp_format = "fallback",
+      },
+    },
   },
 }

@@ -44,7 +44,7 @@ return {
         },
       })
 
-      require('lspconfig').clangd.setup(
+      vim.lsp.config("clangd",
         {
           on_attach = function(_, bufnr)
 

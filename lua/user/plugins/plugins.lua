@@ -4,7 +4,7 @@ return {
   { "farmergreg/vim-lastplace" },
   { "nvim-treesitter/playground" },
   { "terrastruct/d2-vim" },
-  { "xuhdev/vim-latex-live-preview" },
+  -- { "xuhdev/vim-latex-live-preview" },
   { "lervag/vimtex",
     init = function()
       vim.g.vimtex_view_method = "zathura"
@@ -77,12 +77,12 @@ return {
   { "https://gitlab.com/HiPhish/rainbow-delimiters.nvim" },
   { "ggandor/flit.nvim",
     opts = {},
-    dependencies = { "ggandor/leap.nvim", "tpope/vim-repeat" }
+    dependencies = { "tpope/vim-repeat" }
   },
-  { "ggandor/leap.nvim",
+  { url = "https://codeberg.org/andyg/leap.nvim",
     dependencies = { 'tpope/vim-repeat' },
     config = function()
-      require('leap').add_default_mappings()
+      -- require('leap').add_default_mappings()
       require('leap').opts.preview_filter = function() return false end
 
       vim.api.nvim_set_hl(0, 'LeapBackdrop', { link = 'Comment' }) -- or some grey

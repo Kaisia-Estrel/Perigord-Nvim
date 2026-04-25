@@ -18,6 +18,7 @@ vim.o.mouse = 'a'
 vim.o.cmdheight = 0
 vim.g.termguicolors = true
 vim.cmd [[set clipboard+=unnamed]]
+vim.opt.swapfile = false
 
 vim.opt.list = true
 vim.opt.listchars = {

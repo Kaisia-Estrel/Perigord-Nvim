@@ -25,12 +25,14 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       setup = {
+        pylsp = {},
+        -- pyright = {},
+
         ruff = {
           on_attach = function(client, _)
             client.server_capabilities.hoverProvider = false
           end
         },
-        pylsp = {}
       },
     },
   },
