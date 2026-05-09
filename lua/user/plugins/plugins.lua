@@ -108,16 +108,4 @@ return {
     end
   },
   { "norcalli/nvim-colorizer.lua", opts = {} },
-  { "numToStr/Comment.nvim",
-    opts = {
-      toggler = {
-        line = "<leader>cc",
-        block = "<leader>cb",
-      },
-      opleader = {
-        line = "<leader>cc",
-        block = "<leader>cb",
-      }
-    }
-  }
 }

@@ -21,7 +21,6 @@ return {
       inlay_hints = { enabled = true },
     },
     config = function(_, opts)
-      local lspconfig = require("lspconfig")
 
       vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
         callback = vim.lsp.codelens.refresh

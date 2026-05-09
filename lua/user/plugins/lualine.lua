@@ -58,7 +58,7 @@ return {
 
       return {
         options = {
-          theme = "catppuccin",
+          -- theme = "catppuccin",
           disabled_filetypes = { "dashboard", "TelescopePrompt" },
           globalstatus = true,
         },

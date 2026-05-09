@@ -127,6 +127,8 @@ vim.keymap.set('n', 'zC', require('ufo').closeAllFolds, { desc = "Close all fold
 vim.keymap.set('n', 'zK', require('ufo').peekFoldedLinesUnderCursor, { desc = "Preview Fold" })
 
 vim.keymap.set('i', '<C-p>', '<C-x><C-p>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>c', 'gcc', { remap = true, silent = true, desc = "Comment Line" })
+vim.keymap.set('v', '<leader>c', 'gc', { remap = true, silent = true, desc = "Comment Selection" })
 
 wk.add({
 
@@ -163,6 +165,7 @@ wk.add({
   { "gt", telescope.live_grep, desc = "Text" },
   { 'vi<tab>', require('user.util.select-indentline').select, desc = "Select Indent" },
   { 'di<tab>', require('user.util.select-indentline').delete, desc = "Select Indent" },
+  { "<leader>ls", require("nvim-navbuddy").open, desc = "Symbols" },
 })
 
 local Hydra = require("hydra")

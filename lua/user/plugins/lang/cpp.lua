@@ -21,71 +21,92 @@ return {
   {
     "p00f/clangd_extensions.nvim",
     dependencies = "neovim/nvim-lspconfig",
-    config = function()
-      require("clangd_extensions").setup({
-        ast = {
-          role_icons = {
-            type = "",
-            declaration = "",
-            expression = "",
-            specifier = "",
-            statement = "",
-            ["template argument"] = "",
-          },
-          kind_icons = {
-            Compound = "",
-            Recovery = "",
-            TranslationUnit = "",
-            PackExpansion = "",
-            TemplateTypeParm = "",
-            TemplateTemplateParm = "",
-            TemplateParamObject = "",
-          },
-        },
-      })
+  },
 
-      vim.lsp.config("clangd",
-        {
+  {
+    'neovim/nvim-lspconfig',
+    opts = {
+      setup = {
+        clangd = {
           on_attach = function(_, bufnr)
 
             vim.keymap.set('n', "<leader>lh", "<cmd>ClangdSwitchSourceHeader<cr>",
               { buffer = bufnr, desc = "Switch header/source" })
 
           end,
-          root_dir = function(fname)
-            return require("lspconfig.util").root_pattern(
-              "Makefile",
-              "configure.ac",
-              "configure.in",
-              "config.h.in",
-              "meson.build",
-              "meson_options.txt",
-              "build.ninja"
-            )(fname) or require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(
-              fname
-            ) or require("lspconfig.util").find_git_ancestor(fname)
-          end,
-          capabilities = {
-            offsetEncoding = { "utf-16" },
-          },
-          cmd = {
-            "clangd",
-            "--background-index",
-            "--clang-tidy",
-            "--header-insertion=iwyu",
-            "--completion-style=detailed",
-            "--function-arg-placeholders",
-            "--fallback-style=llvm",
-          },
-          init_options = {
-            usePlaceholders = true,
-            completeUnimported = true,
-            clangdFileStatus = true,
-          },
         }
-      )
-    end,
+      }
+    }
   },
+
+  -- {
+  --   "p00f/clangd_extensions.nvim",
+  --   dependencies = "neovim/nvim-lspconfig",
+  --   config = function()
+  --     require("clangd_extensions").setup({
+  --       ast = {
+  --         role_icons = {
+  --           type = "",
+  --           declaration = "",
+  --           expression = "",
+  --           specifier = "",
+  --           statement = "",
+  --           ["template argument"] = "",
+  --         },
+  --         kind_icons = {
+  --           Compound = "",
+  --           Recovery = "",
+  --           TranslationUnit = "",
+  --           PackExpansion = "",
+  --           TemplateTypeParm = "",
+  --           TemplateTemplateParm = "",
+  --           TemplateParamObject = "",
+  --         },
+  --       },
+  --     })
+  --
+  --     vim.lsp.config("clangd",
+  --       {
+  --         on_attach = function(_, bufnr)
+  --
+  --           vim.keymap.set('n', "<leader>lh", "<cmd>ClangdSwitchSourceHeader<cr>",
+  --             { buffer = bufnr, desc = "Switch header/source" })
+  --
+  --         end,
+  --         root_dir = function(fname)
+  --           return require("lspconfig.util").root_pattern(
+  --             "Makefile",
+  --             "configure.ac",
+  --             "configure.in",
+  --             "config.h.in",
+  --             "meson.build",
+  --             "meson_options.txt",
+  --             "build.ninja"
+  --           )(fname) or require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(
+  --             fname
+  --           )
+  --         end,
+  --         capabilities = {
+  --           offsetEncoding = { "utf-16" },
+  --         },
+  --         cmd = {
+  --           "clangd",
+  --           "--background-index",
+  --           "--clang-tidy",
+  --           "--header-insertion=iwyu",
+  --           "--completion-style=detailed",
+  --           "--function-arg-placeholders",
+  --           "--fallback-style=llvm",
+  --         },
+  --         init_options = {
+  --           usePlaceholders = true,
+  --           completeUnimported = true,
+  --           clangdFileStatus = true,
+  --         },
+  --       }
+  --     )
+  --   end,
+  -- },
 
   {
     "nvim-cmp",
