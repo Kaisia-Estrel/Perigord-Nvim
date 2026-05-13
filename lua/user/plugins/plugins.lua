@@ -2,7 +2,6 @@ return {
   { "anuvyklack/vim-smartword" },
   { "eraserhd/parinfer-rust", build = "cargo build --release" },
   { "farmergreg/vim-lastplace" },
-  { "nvim-treesitter/playground" },
   { "terrastruct/d2-vim" },
   -- { "xuhdev/vim-latex-live-preview" },
   { "lervag/vimtex",

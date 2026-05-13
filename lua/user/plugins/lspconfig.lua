@@ -22,9 +22,9 @@ return {
     },
     config = function(_, opts)
 
-      vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
-        callback = vim.lsp.codelens.refresh
-      })
+      -- vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
+      --   callback = vim.lsp.codelens.refresh
+      -- })
       vim.lsp.inlay_hint.enable()
 
 
@@ -43,10 +43,10 @@ return {
       })
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities.textDocument.foldingRange = {
-        dynamicRegistration = false,
-        lineFoldingOnly = true
-      }
+      -- capabilities.textDocument.foldingRange = {
+      --   dynamicRegistration = false,
+      --   lineFoldingOnly = true
+      -- }
 
       opts.setup.bashls = {}
 

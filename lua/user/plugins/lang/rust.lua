@@ -59,7 +59,6 @@ return {
               vim.cmd.RustLsp("joinLines")
             end, { desc = "Open in Doc.rs", buffer = bufnr })
 
-            vim.lsp.codelens.refresh()
           end,
           default_settings = {
             -- rust-analyzer language server configuration
