@@ -74,15 +74,19 @@ return {
   { "nacro90/numb.nvim", opts = {} },
   { "famiu/bufdelete.nvim" },
   { "https://gitlab.com/HiPhish/rainbow-delimiters.nvim" },
-  { "ggandor/flit.nvim",
-    opts = {},
-    dependencies = { "tpope/vim-repeat" }
-  },
   { url = "https://codeberg.org/andyg/leap.nvim",
     dependencies = { 'tpope/vim-repeat' },
+    opts = {
+
+    },
     config = function()
       -- require('leap').add_default_mappings()
-      require('leap').opts.preview_filter = function() return false end
+      -- require('leap').opts.preview_filter = function() return false end
+      local leap = require('leap').leap
+      vim.keymap.set('n', 's',
+        function() leap {} end, { noremap = true, silent = true, desc = "Leap Forward" })
+      vim.keymap.set('n', 'S',
+        function() leap { backward = true } end, { noremap = true, silent = true, desc = "Leap Forward" })
 
       vim.api.nvim_set_hl(0, 'LeapBackdrop', { link = 'Comment' }) -- or some grey
       vim.api.nvim_set_hl(0, 'LeapMatch', {
