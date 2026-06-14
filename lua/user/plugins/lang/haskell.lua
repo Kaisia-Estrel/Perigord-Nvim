@@ -10,11 +10,11 @@ return {
       table.insert(opts.ensure_installed, "haskell")
     end
   },
-
   {
     "mrcjkb/haskell-tools.nvim",
-    version = "^4",
+    version = "^10",
     ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
+    lazy = false,
     dependencies = {
       { "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap" },
     },
@@ -23,7 +23,6 @@ return {
       if ok then
         telescope.load_extension("ht")
       end
-
       vim.g.haskell_tools = {
         tools = {
           repl = {
@@ -38,55 +37,66 @@ return {
             end
             vim.keymap.set('n', "<leader>lp", function() ht.repl.toggle(vim.api.nvim_buf_get_name(0)) end,
               opts({ desc = "Toggle Repl" }))
-            vim.keymap.set('n', "<leader>lh", "<cmd>Telescope hoogle<cr>", opts({ desc = "Hoogle Search" }))
+            vim.keymap.set('n', "<leader>lh", "<cmd>Telescope ht hoogle_signature<cr>", opts({ desc = "Hoogle Search" }))
           end
         }
+
       }
-      vim.cmd("TSEnable highlight")
-    end,
+      -- vim.treesitter.start
+    end
+    --
+    --   vim.g.haskell_tools = {
+    --     tools = {
+    --       repl = {
+    --         handler = 'toggleterm',
+    --         auto_focus = true
+    --       }
+    --     },
+    --   }
+    -- end,
   },
-
-  {
-    "mfussenegger/nvim-dap",
-  },
-
-  {
-    "nvim-neotest/neotest",
-    dependencies = {
-      { "mrcjkb/neotest-haskell", "nvim-neotest/nvim-nio" },
-    },
-    opts = function(_, opts)
-      if opts == nil or vim.tbl_isempty(opts) then
-        return {
-          adapters = { require('neotest-haskell') }
-        }
-      else
-        table.insert(opts.adapters, require('neotest-haskell'))
-      end
-    end,
-  },
-
-  {
-    "mrcjkb/haskell-snippets.nvim",
-    dependencies = { "L3MON4D3/LuaSnip" },
-    ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
-    config = function()
-      local haskell_snippets = require("haskell-snippets").all
-      require("luasnip").add_snippets("haskell", haskell_snippets, { key = "haskell" })
-    end,
-  },
-
-  {
-    "luc-tielen/telescope_hoogle",
-    ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
-    dependencies = {
-      { "nvim-telescope/telescope.nvim" },
-    },
-    config = function()
-      local ok, telescope = pcall(require, "telescope")
-      if ok then
-        telescope.load_extension("hoogle")
-      end
-    end,
-  },
+  --
+  --   {
+  --     "mfussenegger/nvim-dap",
+  --   },
+  --
+  --   {
+  --     "nvim-neotest/neotest",
+  --     dependencies = {
+  --       { "mrcjkb/neotest-haskell", "nvim-neotest/nvim-nio" },
+  --     },
+  --     opts = function(_, opts)
+  --       if opts == nil or vim.tbl_isempty(opts) then
+  --         return {
+  --           adapters = { require('neotest-haskell') }
+  --         }
+  --       else
+  --         table.insert(opts.adapters, require('neotest-haskell'))
+  --       end
+  --     end,
+  --   },
+  --
+  --   {
+  --     "mrcjkb/haskell-snippets.nvim",
+  --     dependencies = { "L3MON4D3/LuaSnip" },
+  --     ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
+  --     config = function()
+  --       local haskell_snippets = require("haskell-snippets").all
+  --       require("luasnip").add_snippets("haskell", haskell_snippets, { key = "haskell" })
+  --     end,
+  --   },
+  --
+  --   {
+  --     "luc-tielen/telescope_hoogle",
+  --     ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
+  --     dependencies = {
+  --       { "nvim-telescope/telescope.nvim" },
+  --     },
+  --     config = function()
+  --       local ok, telescope = pcall(require, "telescope")
+  --       if ok then
+  --         telescope.load_extension("hoogle")
+  --       end
+  --     end,
+  --   },
 }

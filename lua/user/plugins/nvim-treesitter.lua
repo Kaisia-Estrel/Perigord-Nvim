@@ -2,12 +2,22 @@ return {
   -- { "nvim-treesitter/playground" },
   { "nvim-treesitter/nvim-treesitter",
     config = function(_, opts)
-
       opts.ensure_installed = opts.ensure_installed or {}
-      table.insert(opts.ensure_installed, "yuck")
-      opts.highlight = { enable = true }
-      require('nvim-treesitter.config').setup(opts)
-    end
+      local ts = require("nvim-treesitter")
+      local already_installed = ts.get_installed()
+      local to_install = vim.iter(opts.ensure_installed):filter(function(parser)
+        return not vim.tbl_contains(already_installed, parser)
+      end):totable()
+      ts.install(to_install)
+    end,
+    init = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup("treesitter_setup", { clear = true }),
+        callback = function()
+          pcall(vim.treesitter.start)
+        end,
+      })
+    end,
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
