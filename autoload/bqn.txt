@@ -1,0 +1,103 @@
+← (\[) Define
+⇐ (\?) Export
+↩ (\') Change
+→ (\]) Return
+⋄ (\;) Separator
+,,      Separator
+:      Header separator
+;      Body separator
+?      Predicate
+.      Decimal, Namespace field
+(      Begin expression
+)      End expression
+{      Begin function or modifier
+}      End function or modifier
+⟨ (\() Begin list
+⟩ (\)) End list
+[      Begin array
+]      End array
+‿ (\<space>) Strand
+· (\:) Nothing
+∞ (\8) Infinity
+¯ (\9) Minus
+π (\p) Pi
+@      Null character
+'      Character
+"      String (list of characters)
+• (\0) System
+𝕤 (\s) Current function (as subject)
+𝕊 (\S) Current function
+𝕨 (\w) Left argument
+𝕎 (\W) Left argument (as function)
+𝕩 (\x) Right argument
+𝕏 (\X) Right argument (as function)
+𝕣 (\R) Current modifier
+𝕗 (\f) Modifier left operand (as subject)
+𝔽 (\F) Modifier left operand
+𝕘 (\g) 2-modifier right operand (as subject)
+𝔾 (\G) 2-modifier right operand
+#      Comment
++      Conjugate ; Add
+-      Negate ; Subtract
+× (\=) Sign ; Multiply
+÷ (\-) Reciprocal ; Divide
+⋆ (\+) Exponential ; Power
+√ (\_) Square Root ; Root
+⌊ (\b) Floor ; Minimum
+⌈ (\B) Ceiling ; Maximum
+∧ (\t) Sort Up ; And
+∨ (\v) Sort Down ; Or
+¬ (\~) Not ; Span
+|      Absolute Value ; Modulus
+≤ (\<)  ; Less Than or Equal to
+<      Enclose ; Less Than
+>      Merge ; Greater Than
+≥ (\>)  ; Greater Than or Equal to
+=      Rank ; Equals
+≠ (\/) Length ; Not Equals
+≡ (\m) Depth ; Match
+≢ (\M) Shape ; Not Match
+⊣ (\{) Identity ; Left
+⊢ (\}) Identity ; Right
+⥊ (\z) Deshape ; Reshape
+∾ (\,) Join ; Join to
+≍ (\.) Solo ; Couple
+⋈ (\Z) Enlist ; Pair
+↑ (\r) Prefixes ; Take
+↓ (\c) Suffixes ; Drop
+↕ (\d) Range ; Windows
+» (\L) Nudge ; Shift Before
+« (\H) Nudge Back ; Shift After
+⌽ (\q) Reverse ; Rotate
+⍉ (\a) Transpose ; Reorder axes
+/      Indices ; Replicate
+⍋ (\T) Grade Up ; Bins Up
+⍒ (\V) Grade Down ; Bins Down
+⊏ (\i) First Cell ; Select
+⊑ (\I) First ; Pick
+⊐ (\o) Classify ; Index of
+⊒ (\O) Occurrence Count ; Progressive Index of
+∊ (\e) Mark Firsts ; Member of
+⍷ (\E) Deduplicate ; Find
+⊔ (\u) Group Indices ; Group
+!      Assert ; Assert with message
+˙ (\") Constant | {𝕩⋄𝕗} | Return a function that returns the operand
+˜ (\`) Self/Swap | {𝕩𝔽𝕨⊣𝕩} | Duplicate one argument or exchange two
+∘ (\j) Atop | {𝔽𝕨𝔾𝕩} | Apply 𝔾 to both arguments and 𝔽 to the result
+○ (\k) Over | {(𝔾𝕨)𝔽𝔾𝕩} | Apply 𝔾 to each argument and 𝔽 to the results
+⊸ (\h) Before/Bind | {(𝔽𝕨⊣𝕩)𝔾𝕩} | 𝔾's left argument comes from 𝔽
+⟜ (\l) After/Bind | {(𝕨⊣𝕩)𝔽𝔾𝕩} | 𝔽's right argument comes from 𝔾
+⌾ (\K) Under | {𝔾⁼∘𝔽○𝔾} | OR {(𝔾𝕩)↩𝕨𝔽○𝔾𝕩⋄𝕩} Apply 𝔽 over 𝔾, then undo 𝔾
+⊘ (\%) Valences | {𝔽𝕩;𝕨𝔾𝕩} | Apply 𝔽 if there's one argument but 𝔾 if there are two
+◶ (\$) Choose | {f←(𝕨𝔽𝕩)⊑𝕘 ⋄ 𝕨F𝕩} | Select one of the functions in list 𝕘 based on 𝔽
+⎊ (\^) Catch
+˘ (\1) Cells
+⎉ (\!) Rank
+¨ (\2) Each
+⚇ (\@) Depth
+⌜ (\4) Table
+⁼ (\3) Undo
+⍟ (\#) Repeat
+´ (\5) Fold
+˝ (\6) Insert
+`      Scan
