@@ -19,6 +19,9 @@ return {
       })
     end,
   },
+  { "jwalton512/vim-blade" },
+  { "nelsyeung/twig.vim" },
+
   {
     "nvim-treesitter/nvim-treesitter-context",
     event = "VeryLazy",

@@ -22,11 +22,16 @@ return {
   },
 
   {
+    "feakuru/mypy.nvim",
+    opts = {}
+  },
+
+  {
     "neovim/nvim-lspconfig",
     opts = {
       setup = {
-        pylsp = {},
-        -- pyright = {},
+        -- pylsp = {},
+        pyright = {},
 
         ruff = {
           on_attach = function(client, _)
